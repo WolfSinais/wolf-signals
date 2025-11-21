@@ -874,6 +874,105 @@
           </div>
         </div>
       </section>
+    <!-- PAINEL SNIPER • RODAPÉ -->
+    <section class="wolf-sniper-footer">
+      <div class="wolf-sniper-header">
+        <div>
+          <h3>Wolf Sniper • Filtro de sinais fortes</h3>
+          <p>Busca automática apenas sinais com probabilidade ≥ <span id="minProbValor">88</span>%.</p>
+        </div>
+        <div class="wolf-sniper-clock">
+          <span>Horário (Brasília):</span>
+          <strong id="wolfClock">--:--:--</strong>
+        </div>
+      </div>
+
+      <div class="wolf-sniper-actions">
+        <button id="wolfStart" class="wolf-btn-primary">
+          Iniciar análise Sniper
+        </button>
+        <button id="wolfNext" class="wolf-btn-secondary" disabled>
+          Próximo sinal
+        </button>
+      </div>
+
+      <p id="wolfStatus" class="wolf-sniper-status">
+        Aguardando… clique em <b>Iniciar análise Sniper</b> para buscar o melhor sinal.
+      </p>
+
+      <div class="wolf-sniper-current">
+        <div>
+          <div class="wolf-label">Par / Timeframe</div>
+          <div class="wolf-value" id="wolfPar">--</div>
+        </div>
+        <div>
+          <div class="wolf-label">Direção</div>
+          <div class="wolf-value" id="wolfDirecao">--</div>
+        </div>
+        <div>
+          <div class="wolf-label">Horário de entrada</div>
+          <div class="wolf-value" id="wolfEntrada">--</div>
+        </div>
+        <div>
+          <div class="wolf-label">Expiração / Saída prevista</div>
+          <div class="wolf-value" id="wolfSaida">--</div>
+        </div>
+        <div>
+          <div class="wolf-label">Cenário</div>
+          <div class="wolf-value" id="wolfCenario">--</div>
+        </div>
+        <div>
+          <div class="wolf-label">Probabilidade</div>
+          <div class="wolf-value" id="wolfProb">--</div>
+        </div>
+      </div>
+
+      <div class="wolf-sniper-toplist">
+        <h4>Top sinais do momento (acima de 88%)</h4>
+        <div id="wolfTopList" class="wolf-toplist-body">
+          <p class="wolf-empty">Ainda não carregamos os pares. Clique em “Iniciar análise Sniper”.</p>
+        </div>
+      </div>
+    </section>
+<!-- PAINEL SNIPER WOLF MUTANTE -->
+<section class="wolf-sniper-panel">
+
+  <h3 class="wolf-title">⚡ Painel Sniper Mutante • Análise Automática</h3>
+
+  <!-- Relógio -->
+  <div class="wolf-clock-box">
+      <span class="wolf-clock-label">Horário atual:</span>
+      <span id="wolfClock" class="wolf-clock">--:--:--</span>
+  </div>
+
+  <!-- Botões -->
+  <div class="wolf-btn-box">
+      <button id="btnIniciar" class="wolf-btn wolf-primary">Iniciar análise Sniper</button>
+      <button id="btnProximo" class="wolf-btn wolf-secondary" disabled>Próximo sinal</button>
+  </div>
+
+  <!-- Status -->
+  <p id="wolfStatus" class="wolf-status">
+      Clique em <b>“Iniciar análise Sniper”</b> para gerar o primeiro sinal.
+  </p>
+
+  <!-- Resultado do sinal -->
+  <div class="wolf-result-card">
+      <div class="wolf-row">
+          <div>
+              <div class="wolf-label">Par</div>
+              <div id="wolfPar" class="wolf-value">--</div>
+          </div>
+          <div>
+              <div class="wolf-label">Direção</div>
+              <div id="wolfDirecao" class="wolf-value">--</div>
+          </div>
+      </div>
+
+      <div class="wolf-row">
+          <div>
+              <div class="wolf-label">Entrada</div>
+              <div id="wolfEntrada" class="wolf-value">--</div
 
       <!-- FOOTER -->
       <footer class="footer">
