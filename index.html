@@ -1,36 +1,520 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wolf Signals</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wolf Signals</title>
 
-    <style>
-        body {
-            background: #0a0a0a;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 50px;
-        }
-        h1 {
-            color: #00aaff;
-        }
-        .box {
-            background: #111;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            margin: auto;
-            border: 1px solid #00aaff;
-        }
-    </style>
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-card: rgba(15, 23, 42, 0.95);
+      --bg-chip: rgba(15, 23, 42, 0.9);
+      --primary: #22d3ee;
+      --primary-soft: rgba(34, 211, 238, 0.18);
+      --accent: #f97316;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --error: #f97373;
+      --success: #4ade80;
+      --border: rgba(148, 163, 184, 0.35);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.9);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 10px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 430px;
+      background: radial-gradient(circle at top, #020617 0, #020617 35%, #020617 100%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 16px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glow {
+      position: absolute;
+      inset: auto;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.20), transparent 70%);
+      filter: blur(12px);
+      opacity: 0.7;
+      pointer-events: none;
+      right: -90px;
+      top: -110px;
+    }
+
+    .app-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* HEADER */
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 20%, #e5e7eb 0, #9ca3af 40%, #111827 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.6);
+      font-size: 20px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--primary);
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .status-chip {
+      background: var(--bg-chip);
+      border-radius: var(--radius-pill);
+      padding: 6px 10px;
+      border: 1px solid rgba(52, 211, 153, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--success);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 12px rgba(74, 222, 128, 0.9);
+    }
+
+    /* CARD PRINCIPAL */
+
+    .card-main {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.93));
+      border-radius: var(--radius-lg);
+      padding: 14px 14px 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.8);
+      margin-bottom: 14px;
+    }
+
+    .card-main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .card-main-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .tag-session {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--primary-soft);
+      border: 1px solid rgba(34, 211, 238, 0.6);
+      color: var(--primary);
+    }
+
+    .signal-box {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(34, 211, 238, 0.55);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 1));
+      padding: 12px 10px 12px;
+      text-align: center;
+    }
+
+    .signal-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .signal-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .signal-status {
+      font-size: 11px;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px dashed rgba(34, 211, 238, 0.6);
+    }
+
+    /* BOTÕES DE TEMPO */
+
+    .time-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .time-btn {
+      flex: 1;
+      border-radius: var(--radius-pill);
+      padding: 7px 0;
+      font-size: 11px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .time-btn span {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .time-btn.primary {
+      border-color: rgba(34, 211, 238, 0.85);
+      background: linear-gradient(
+        135deg,
+        rgba(34, 211, 238, 0.25),
+        rgba(56, 189, 248, 0.08)
+      );
+      color: var(--primary);
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.4);
+    }
+
+    /* BLOCO PRÓXIMO SINAL */
+
+    .next-card {
+      margin-top: 14px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+      padding: 10px 11px;
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr;
+      column-gap: 10px;
+      row-gap: 6px;
+      font-size: 11px;
+    }
+
+    .next-label {
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .next-value {
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 2px;
+    }
+
+    .next-badge {
+      font-size: 11px;
+      color: var(--accent);
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(148, 163, 184, 0.08);
+      justify-self: flex-end;
+      align-self: flex-start;
+      border: 1px solid rgba(249, 115, 22, 0.7);
+    }
+
+    /* HISTÓRICO */
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin: 14px 2px 6px;
+    }
+
+    .history {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: rgba(15, 23, 42, 0.96);
+      padding: 8px 9px 6px;
+      max-height: 150px;
+      overflow: auto;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 2px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+      font-size: 11px;
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .pair {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .tf {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .dir {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .dir.call {
+      color: var(--success);
+    }
+
+    .dir.put {
+      color: var(--error);
+    }
+
+    .result {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--muted);
+    }
+
+    .result.win {
+      border-color: rgba(74, 222, 128, 0.8);
+      color: var(--success);
+    }
+
+    .result.loss {
+      border-color: rgba(248, 113, 113, 0.8);
+      color: var(--error);
+    }
+
+    /* RODAPÉ */
+
+    .footer {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--muted);
+      opacity: 0.9;
+    }
+
+    .footer span strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .footer-tag {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    @media (max-width: 370px) {
+      .app {
+        border-radius: 18px;
+        padding: 14px 10px 14px;
+      }
+
+      .card-main {
+        padding: 10px 9px 12px;
+      }
+
+      .next-card {
+        font-size: 10px;
+      }
+
+      .history-item {
+        font-size: 10px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>🐺 Wolf Signals</h1>
-    <div class="box">
-        <p>Mini app carregado com sucesso!</p>
-        <p>Agora vamos colocar o design real 🔥</p>
+  <div class="app">
+    <div class="glow"></div>
+
+    <div class="app-inner">
+      <!-- HEADER -->
+      <header class="header">
+        <div class="brand">
+          <div class="logo">🐺</div>
+          <div class="brand-text">
+            <div class="brand-title">Wolf Signals</div>
+            <div class="brand-sub">Pocket Option • M5 • Retração</div>
+          </div>
+        </div>
+
+        <div class="status-chip">
+          <div class="dot"></div>
+          <span>Online</span>
+        </div>
+      </header>
+
+      <!-- CARD PRINCIPAL -->
+      <section class="card-main">
+        <div class="card-main-header">
+          <span class="card-main-title">Sessão de Sinais</span>
+          <span class="tag-session">Live • Hoje</span>
+        </div>
+
+        <div class="signal-box">
+          <div class="signal-title">Mini app carregado com sucesso ✅</div>
+          <div class="signal-sub">Use o menu abaixo para acompanhar os sinais em tempo real.</div>
+          <div class="signal-status">
+            <span>🔥 Setup Wolf Sniper carregado</span>
+          </div>
+
+          <div class="time-row">
+            <button class="time-btn primary">
+              <span>5s</span>
+              • Scalper
+            </button>
+            <button class="time-btn">
+              <span>30s</span>
+              • Turbo
+            </button>
+            <button class="time-btn">
+              <span>1min</span>
+              • M1
+            </button>
+          </div>
+
+          <div class="next-card">
+            <div>
+              <div class="next-label">Próximo par</div>
+              <div class="next-value">EURUSD OTC</div>
+            </div>
+            <div>
+              <div class="next-label">Horário</div>
+              <div class="next-value">10:35 • Brasília</div>
+            </div>
+            <div>
+              <div class="next-label">Direção</div>
+              <div class="next-value">CALL • Compra</div>
+            </div>
+            <div class="next-badge">Exemplo de layout – edite no GitHub</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HISTÓRICO -->
+      <div class="section-title">Histórico recente (exemplo)</div>
+      <section class="history">
+        <div class="history-item">
+          <div>
+            <div class="pair">EURUSD OTC</div>
+            <div class="tf">M5 • CALL</div>
+          </div>
+          <div class="dir call">WIN</div>
+          <div class="result win">+0.87%</div>
+        </div>
+        <div class="history-item">
+          <div>
+            <div class="pair">GBPUSD</div>
+            <div class="tf">M5 • PUT</div>
+          </div>
+          <div class="dir put">LOSS</div>
+          <div class="result loss">–1.00%</div>
+        </div>
+        <div class="history-item">
+          <div>
+            <div class="pair">USDJPY</div>
+            <div class="tf">M5 • CALL</div>
+          </div>
+          <div class="dir call">WIN</div>
+          <div class="result win">+0.92%</div>
+        </div>
+        <div class="history-item">
+          <div>
+            <div class="pair">EURJPY</div>
+            <div class="tf">M5 • PUT</div>
+          </div>
+          <div class="dir call">WIN</div>
+          <div class="result win">+0.81%</div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <span>Desenvolvido por <strong>Wolf Mutante</strong></span>
+        <span class="footer-tag">v1.0 • Layout de teste</span>
+      </footer>
     </div>
+  </div>
 </body>
 </html>
