@@ -662,7 +662,7 @@
             <div class="pill">
               Base: <strong>M1 + M5</strong> • OTC
             </div>
-          </div>
+          
 
           <div class="session-box">
             <div class="session-header">
@@ -672,49 +672,68 @@
             <p class="session-title">
               Use o painel abaixo para acompanhar os sinais e a performance da estratégia Wolf Sniper Trader.
             </p>
-            <p class="session-text">
-              Os sinais são gerados com base em indicadores (EMA, RSI, Bandas de Bollinger) em M1 e M5,
-              focando nos pares OTC da Pocket Option com melhor payout.
-            </p>
+            <p <!-- TIMEFRAMES -->
+<div class="timeframe-row">
+  <button class="tf-pill active" data-timeframe="M5">
+    M5 • Retração principal
+  </button>
+  <button class="tf-pill" data-timeframe="M1">
+    M1 • Filtro de entrada
+  </button>
+</div>
 
-            <button type="button" class="btn-setup">
-              <span class="dot"></span>
-              Setup Wolf Sniper ativo • M1 + M5
-            </button>
+<!-- BOTÕES DE ANÁLISE -->
+<div class="analysis-actions">
+  <button id="btnRealizarAnalise" class="btn-setup btn-sniper">
+    Realizar análise sniper
+  </button>
+  <button id="btnProximaAnalise" class="tf-pill btn-next" disabled>
+    Próxima análise
+  </button>
+</div>
 
-            <!-- TIMEFRAMES -->
-            <div class="timeframe-row">
-              <button class="tf-pill active" data-tf="M5">M5 • Retração principal</button>
-              <button class="tf-pill" data-tf="M1">M1 • Filtro de entrada</button>
-            </div>
+<p id="statusAnalise" class="session-text status-text">
+  Toque em <b>“Realizar análise sniper”</b> para gerar o próximo sinal.
+</p>
 
-            <!-- PRÓXIMO SINAL -->
-            <div class="next-signal-card">
-              <div class="next-row">
-                <div>
-                  <div class="next-label">Próximo par</div>
-                  <div class="next-value">EURUSD OTC</div>
-                  <div class="next-label" style="margin-top: 4px;">Direção</div>
-                  <div class="next-value">CALL • Compra (exemplo)</div>
-                </div>
-                <div>
-                  <div class="next-label">Horário</div>
-                  <div class="next-value">
-                    <span id="next-time">--:--</span> • Brasília
-                  </div>
-                  <div class="next-label" style="margin-top: 4px;">Timeframe</div>
-                  <div class="next-value">M5 • Expiração 5 min</div>
-                </div>
-              </div>
+<!-- PRÓXIMO SINAL -->
+<div class="next-signal-card">
+  <div class="next-row">
+    <div>
+      <div class="next-label">Próximo par</div>
+      <div class="next-value" id="proximoPar">EURUSD OTC</div>
 
-              <div class="next-highlight">
-                Exemplo de layout.
-                <small>Os horários e pares reais virão da sua engine Python de sinais.</small>
-              </div>
-            </div>
-          </div>
+      <div class="next-label" style="margin-top: 4px;">Direção</div>
+      <div class="next-value" id="proximaDirecao">
+        Aguardando análise…
+      </div>
+    </div>
 
-          <p class="history-title">Histórico recente (exemplo)</p>
+    <div>
+      <div class="next-label">Horário de entrada</div>
+      <div class="next-value" id="proximoHorario">--:-- • Brasília</div>
+
+      <div class="next-label" style="margin-top: 4px;">Timeframe</div>
+      <div class="next-value" id="proximoTimeframe">
+        M5 • Expiração 5 min
+      </div>
+    </div>
+  </div>
+
+  <div class="next-row" style="margin-top: 10px; border-top: 1px dashed rgba(148,163,184,.4); padding-top: 8px;">
+    <div>
+      <div class="next-label">Saída prevista</div>
+      <div class="next-value" id="saidaPrevista">--:-- • Brasília</div>
+    </div>
+
+    <div>
+      <div class="next-label">Cenário com maior probabilidade</div>
+      <div class="next-value" id="melhorCenario">
+        Aguardando análise…
+      </div>
+    </div>
+  </div>
+</div>
           <div class="history-list">
             <div class="history-item">
               <div class="pair-side">
@@ -907,6 +926,129 @@
     }
     updateClock();
     setInterval(updateClock, 60000);
-  </script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const state = {
+      timeframe: "M5",
+      currentPairIndex: 0,
+      pairs: ["EURUSD OTC", "GBPUSD OTC", "USDJPY OTC", "EURJPY OTC"],
+    };
+
+    const timeframeButtons = document.querySelectorAll(
+      ".timeframe-row .tf-pill[data-timeframe]"
+    );
+    const btnAnalise = document.getElementById("btnRealizarAnalise");
+    const btnProxima = document.getElementById("btnProximaAnalise");
+    const statusEl = document.getElementById("statusAnalise");
+
+    const elPar = document.getElementById("proximoPar");
+    const elHorario = document.getElementById("proximoHorario");
+    const elDirecao = document.getElementById("proximaDirecao");
+    const elTimeframe = document.getElementById("proximoTimeframe");
+    const elSaida = document.getElementById("saidaPrevista");
+    const elCenario = document.getElementById("melhorCenario");
+
+    // -------- seleção M1 / M5 ----------
+    timeframeButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        timeframeButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        state.timeframe = btn.dataset.timeframe; // "M1" ou "M5"
+      });
+    });
+
+    function formatHora(date) {
+      return (
+        date.toLocaleTimeString("pt-BR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }) + " • Brasília"
+      );
+    }
+
+    function getNextPair() {
+      const par = state.pairs[state.currentPairIndex % state.pairs.length];
+      state.currentPairIndex++;
+      return par;
+    }
+
+    // ------ simula análise técnica (depois vamos plugar na API Python) ------
+    function gerarAnaliseFake(symbol) {
+      const agora = new Date();
+      const minutos = state.timeframe === "M5" ? 5 : 1;
+      const entrada = new Date(agora.getTime() + 5000); // 5s pra “preparar”
+      const expiracao = new Date(entrada.getTime() + minutos * 60000);
+
+      let melhorCenario, probR, probV, direcao, descricao;
+
+      if (state.timeframe === "M5") {
+        melhorCenario = "Retração (M5)";
+        probR = 83;
+        probV = 62;
+        direcao = "CALL";
+        descricao = "Retração na banda inferior + fluxo comprador";
+      } else {
+        melhorCenario = "Reversão (M1)";
+        probR = 64;
+        probV = 79;
+        direcao = "PUT";
+        descricao = "Reversão em resistência + exaustão vendedora";
+      }
+
+      return {
+        symbol,
+        timeframe: state.timeframe,
+        entradaStr: formatHora(entrada),
+        saidaStr: formatHora(expiracao),
+        timeframeStr: `${state.timeframe} • Expiração ${minutos} min`,
+        direcao,
+        descricao,
+        melhorCenario: `${melhorCenario} — Retração: ${probR}% • Reversão: ${probV}%`,
+      };
+    }
+
+    function aplicarResultadoView(r) {
+      elPar.textContent = r.symbol;
+      elHorario.textContent = r.entradaStr;
+      elDirecao.textContent = `${r.direcao} • ${r.descricao}`;
+      elTimeframe.textContent = r.timeframeStr;
+      elSaida.textContent = r.saidaStr;
+      elCenario.textContent = r.melhorCenario;
+    }
+
+    async function realizarAnalise() {
+      const symbol = getNextPair();
+
+      btnAnalise.disabled = true;
+      btnProxima.disabled = true;
+
+      statusEl.textContent =
+        state.timeframe === "M5"
+          ? "Sinal M5 WOLF SNIPER solicitado! — preparando a análise, aguarde..."
+          : "Sinal M1 WOLF SNIPER solicitado! — preparando a análise, aguarde...";
+
+      elPar.textContent = symbol;
+
+      // simula tempo da engine Python
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+
+      const resultado = gerarAnaliseFake(symbol);
+      aplicarResultadoView(resultado);
+
+      statusEl.textContent =
+        "Análise concluída. Confira o sinal acima e aguarde o resultado para solicitar a próxima análise.";
+      btnProxima.disabled = false;
+      btnAnalise.disabled = false;
+    }
+
+    btnAnalise.addEventListener("click", realizarAnalise);
+
+    btnProxima.addEventListener("click", () => {
+      statusEl.textContent =
+        "Próxima análise sniper solicitada! — preparando novo ativo e recalculando a técnica…";
+      realizarAnalise();
+    });
+  });
+</script>
 </body>
 </html>
