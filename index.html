@@ -45,21 +45,20 @@
     .app {
       width: 100%;
       max-width: 430px;
-      background: radial-gradient(circle at top, #020617 0, #020617 35%, #020617 100%);
+      background: #020617;
       border-radius: var(--radius-xl);
       border: 1px solid rgba(148, 163, 184, 0.35);
       box-shadow: var(--shadow-soft);
-      padding: 18px 16px 20px;
+      padding: 18px 12px 16px;
       position: relative;
       overflow: hidden;
     }
 
     .glow {
       position: absolute;
-      inset: auto;
       width: 260px;
       height: 260px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.20), transparent 70%);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 70%);
       filter: blur(12px);
       opacity: 0.7;
       pointer-events: none;
@@ -78,7 +77,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       gap: 10px;
     }
 
@@ -138,7 +137,67 @@
       box-shadow: 0 0 12px rgba(74, 222, 128, 0.9);
     }
 
-    /* CARD PRINCIPAL */
+    /* NAV TABS */
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      padding: 4px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .tab-btn {
+      flex: 1;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      padding: 6px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.18s ease-out;
+    }
+
+    .tab-btn span.icon {
+      font-size: 13px;
+    }
+
+    .tab-btn.active {
+      background: radial-gradient(circle at top, rgba(34, 211, 238, 0.22), rgba(15, 23, 42, 0.95));
+      color: var(--primary);
+      box-shadow: 0 0 16px rgba(34, 211, 238, 0.3);
+    }
+
+    /* SECTIONS */
+
+    .section {
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* DASHBOARD (ANTIGO MAIN CARD) */
 
     .card-main {
       background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.93));
@@ -283,7 +342,7 @@
       border: 1px solid rgba(249, 115, 22, 0.7);
     }
 
-    /* HISTÓRICO */
+    /* SECTION TITLES */
 
     .section-title {
       font-size: 12px;
@@ -294,12 +353,14 @@
       margin: 14px 2px 6px;
     }
 
+    /* HISTÓRICO (DASHBOARD) */
+
     .history {
       border-radius: var(--radius-lg);
       border: 1px solid rgba(31, 41, 55, 0.9);
       background: rgba(15, 23, 42, 0.96);
       padding: 8px 9px 6px;
-      max-height: 150px;
+      max-height: 130px;
       overflow: auto;
     }
 
@@ -358,6 +419,164 @@
       color: var(--error);
     }
 
+    /* SINAIS – LISTAGEM */
+
+    .signals-list {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: rgba(15, 23, 42, 0.97);
+      padding: 8px 9px;
+      max-height: 210px;
+      overflow: auto;
+    }
+
+    .signal-row {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr 0.9fr;
+      column-gap: 6px;
+      padding: 6px 2px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+      font-size: 11px;
+      align-items: center;
+    }
+
+    .signal-row:last-child {
+      border-bottom: none;
+    }
+
+    .badge-dir {
+      font-size: 10px;
+      padding: 3px 6px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      max-width: fit-content;
+    }
+
+    .badge-dir.call {
+      border-color: rgba(74, 222, 128, 0.9);
+      color: var(--success);
+    }
+
+    .badge-dir.put {
+      border-color: rgba(248, 113, 113, 0.9);
+      color: var(--error);
+    }
+
+    .signal-time {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .signal-par {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ESTATÍSTICAS – ASSERTIVIDADE */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .stat-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: rgba(15, 23, 42, 0.97);
+      padding: 8px 9px;
+      font-size: 11px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 10px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .stat-value {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .stat-value.good {
+      color: var(--success);
+    }
+
+    .stat-value.mid {
+      color: var(--accent);
+    }
+
+    .accuracy-table {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: rgba(15, 23, 42, 0.97);
+      padding: 8px 9px;
+      max-height: 210px;
+      overflow: auto;
+      font-size: 11px;
+    }
+
+    .acc-row {
+      padding: 6px 2px 8px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+    }
+
+    .acc-row:last-child {
+      border-bottom: none;
+    }
+
+    .acc-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .acc-pair {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .acc-tf {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .acc-value {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .progress {
+      position: relative;
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+      margin-top: 3px;
+    }
+
+    .progress-bar {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22c55e, #22d3ee);
+      transform-origin: left;
+      transform: scaleX(0.8);
+    }
+
+    .progress-bar.mid {
+      background: linear-gradient(90deg, #facc15, #22d3ee);
+    }
+
+    .progress-bar.low {
+      background: linear-gradient(90deg, #f97373, #facc15);
+    }
+
     /* RODAPÉ */
 
     .footer {
@@ -400,6 +619,10 @@
       .history-item {
         font-size: 10px;
       }
+
+      .signal-row {
+        font-size: 10px;
+      }
     }
   </style>
 </head>
@@ -415,7 +638,7 @@
           <div class="logo">🐺</div>
           <div class="brand-text">
             <div class="brand-title">Wolf Signals</div>
-            <div class="brand-sub">Pocket Option • M5 • Retração</div>
+            <div class="brand-sub">Pocket Option • M5 • Retração</div>
           </div>
         </div>
 
@@ -425,96 +648,271 @@
         </div>
       </header>
 
-      <!-- CARD PRINCIPAL -->
-      <section class="card-main">
-        <div class="card-main-header">
-          <span class="card-main-title">Sessão de Sinais</span>
-          <span class="tag-session">Live • Hoje</span>
-        </div>
+      <!-- NAV TABS -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="dashboard">
+          <span class="icon">🏠</span>
+          <span>Dashboard</span>
+        </button>
+        <button class="tab-btn" data-tab="signals">
+          <span class="icon">📡</span>
+          <span>Sinais</span>
+        </button>
+        <button class="tab-btn" data-tab="stats">
+          <span class="icon">📊</span>
+          <span>Estatísticas</span>
+        </button>
+      </div>
 
-        <div class="signal-box">
-          <div class="signal-title">Mini app carregado com sucesso ✅</div>
-          <div class="signal-sub">Use o menu abaixo para acompanhar os sinais em tempo real.</div>
-          <div class="signal-status">
-            <span>🔥 Setup Wolf Sniper carregado</span>
+      <!-- DASHBOARD -->
+      <section class="section active" id="dashboard">
+        <section class="card-main">
+          <div class="card-main-header">
+            <span class="card-main-title">Sessão de Sinais</span>
+            <span class="tag-session">Live • Hoje</span>
           </div>
 
-          <div class="time-row">
-            <button class="time-btn primary">
-              <span>5s</span>
-              • Scalper
-            </button>
-            <button class="time-btn">
-              <span>30s</span>
-              • Turbo
-            </button>
-            <button class="time-btn">
-              <span>1min</span>
-              • M1
-            </button>
-          </div>
+          <div class="signal-box">
+            <div class="signal-title">Mini app carregado com sucesso ✅</div>
+            <div class="signal-sub">
+              Use o menu abaixo para acompanhar os sinais e a performance da estratégia Wolf Sniper.
+            </div>
+            <div class="signal-status">
+              <span>🔥 Setup Wolf Sniper ativo • M5</span>
+            </div>
 
-          <div class="next-card">
-            <div>
-              <div class="next-label">Próximo par</div>
-              <div class="next-value">EURUSD OTC</div>
+            <div class="time-row">
+              <div class="time-btn primary">
+                <span>5s</span>
+                Scalper
+              </div>
+              <div class="time-btn">
+                <span>30s</span>
+                Turbo
+              </div>
+              <div class="time-btn">
+                <span>1min</span>
+                M1
+              </div>
             </div>
-            <div>
-              <div class="next-label">Horário</div>
-              <div class="next-value">10:35 • Brasília</div>
+
+            <div class="next-card">
+              <div>
+                <div class="next-label">Próximo par</div>
+                <div class="next-value">EURUSD OTC</div>
+              </div>
+              <div>
+                <div class="next-label">Horário</div>
+                <div class="next-value">10:35 • Brasília</div>
+              </div>
+              <div>
+                <div class="next-label">Direção</div>
+                <div class="next-value">CALL • Compra</div>
+              </div>
+              <div class="next-badge">Exemplo de layout – edite no GitHub</div>
             </div>
-            <div>
-              <div class="next-label">Direção</div>
-              <div class="next-value">CALL • Compra</div>
-            </div>
-            <div class="next-badge">Exemplo de layout – edite no GitHub</div>
           </div>
-        </div>
+        </section>
+
+        <div class="section-title">Histórico recente (exemplo)</div>
+        <section class="history">
+          <div class="history-item">
+            <div>
+              <div class="pair">EURUSD OTC</div>
+              <div class="tf">M5 • CALL</div>
+            </div>
+            <div class="dir call">WIN</div>
+            <div class="result win">+0.87%</div>
+          </div>
+          <div class="history-item">
+            <div>
+              <div class="pair">GBPUSD</div>
+              <div class="tf">M5 • PUT</div>
+            </div>
+            <div class="dir put">LOSS</div>
+            <div class="result loss">–1.00%</div>
+          </div>
+          <div class="history-item">
+            <div>
+              <div class="pair">USDJPY</div>
+              <div class="tf">M5 • CALL</div>
+            </div>
+            <div class="dir call">WIN</div>
+            <div class="result win">+0.92%</div>
+          </div>
+          <div class="history-item">
+            <div>
+              <div class="pair">EURJPY</div>
+              <div class="tf">M5 • PUT</div>
+            </div>
+            <div class="dir call">WIN</div>
+            <div class="result win">+0.81%</div>
+          </div>
+        </section>
       </section>
 
-      <!-- HISTÓRICO -->
-      <div class="section-title">Histórico recente (exemplo)</div>
-      <section class="history">
-        <div class="history-item">
-          <div>
-            <div class="pair">EURUSD OTC</div>
-            <div class="tf">M5 • CALL</div>
+      <!-- SINAIS EM TEMPO REAL (EXEMPLO) -->
+      <section class="section" id="signals">
+        <div class="section-title">Fila de Sinais (exemplo)</div>
+
+        <section class="signals-list">
+          <div class="signal-row">
+            <div>
+              <div class="signal-par">EURUSD OTC</div>
+              <div class="signal-time">Expiração 10:35</div>
+            </div>
+            <div class="badge-dir call">CALL</div>
+            <div class="tf">M5 • Retração</div>
           </div>
-          <div class="dir call">WIN</div>
-          <div class="result win">+0.87%</div>
-        </div>
-        <div class="history-item">
-          <div>
-            <div class="pair">GBPUSD</div>
-            <div class="tf">M5 • PUT</div>
+
+          <div class="signal-row">
+            <div>
+              <div class="signal-par">GBPUSD</div>
+              <div class="signal-time">Expiração 10:40</div>
+            </div>
+            <div class="badge-dir put">PUT</div>
+            <div class="tf">M5 • Retração</div>
           </div>
-          <div class="dir put">LOSS</div>
-          <div class="result loss">–1.00%</div>
-        </div>
-        <div class="history-item">
-          <div>
-            <div class="pair">USDJPY</div>
-            <div class="tf">M5 • CALL</div>
+
+          <div class="signal-row">
+            <div>
+              <div class="signal-par">USDJPY</div>
+              <div class="signal-time">Expiração 10:42</div>
+            </div>
+            <div class="badge-dir call">CALL</div>
+            <div class="tf">M5 • Pullback</div>
           </div>
-          <div class="dir call">WIN</div>
-          <div class="result win">+0.92%</div>
-        </div>
-        <div class="history-item">
-          <div>
-            <div class="pair">EURJPY</div>
-            <div class="tf">M5 • PUT</div>
+
+          <div class="signal-row">
+            <div>
+              <div class="signal-par">EURJPY</div>
+              <div class="signal-time">Expiração 10:47</div>
+            </div>
+            <div class="badge-dir put">PUT</div>
+            <div class="tf">M5 • Retração</div>
           </div>
-          <div class="dir call">WIN</div>
-          <div class="result win">+0.81%</div>
+
+          <div class="signal-row">
+            <div>
+              <div class="signal-par">AUDUSD</div>
+              <div class="signal-time">Expiração 10:50</div>
+            </div>
+            <div class="badge-dir call">CALL</div>
+            <div class="tf">M5 • Tendência</div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ESTATÍSTICAS / ASSERTIVIDADE -->
+      <section class="section" id="stats">
+        <div class="section-title">Visão geral</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Assertividade hoje</div>
+            <div class="stat-value good">86%</div>
+            <div class="signal-time">Exemplo – atualize manualmente</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Últimos 7 dias</div>
+            <div class="stat-value mid">82%</div>
+            <div class="signal-time">Wolf Sniper M5</div>
+          </div>
         </div>
+
+        <div class="section-title">Assertividade por par</div>
+        <section class="accuracy-table">
+          <!-- Cada bloco = 1 par -->
+          <div class="acc-row">
+            <div class="acc-header">
+              <div>
+                <div class="acc-pair">EURUSD OTC</div>
+                <div class="acc-tf">M5 • Retração</div>
+              </div>
+              <div class="acc-value">88%</div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" style="transform: scaleX(0.88);"></div>
+            </div>
+          </div>
+
+          <div class="acc-row">
+            <div class="acc-header">
+              <div>
+                <div class="acc-pair">GBPUSD</div>
+                <div class="acc-tf">M5 • Retração</div>
+              </div>
+              <div class="acc-value">81%</div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar mid" style="transform: scaleX(0.81);"></div>
+            </div>
+          </div>
+
+          <div class="acc-row">
+            <div class="acc-header">
+              <div>
+                <div class="acc-pair">USDJPY</div>
+                <div class="acc-tf">M5 • Pullback</div>
+              </div>
+              <div class="acc-value">84%</div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" style="transform: scaleX(0.84);"></div>
+            </div>
+          </div>
+
+          <div class="acc-row">
+            <div class="acc-header">
+              <div>
+                <div class="acc-pair">EURJPY</div>
+                <div class="acc-tf">M5 • Tendência</div>
+              </div>
+              <div class="acc-value">79%</div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar mid" style="transform: scaleX(0.79);"></div>
+            </div>
+          </div>
+
+          <div class="acc-row">
+            <div class="acc-header">
+              <div>
+                <div class="acc-pair">AUDUSD</div>
+                <div class="acc-tf">M5 • Retração</div>
+              </div>
+              <div class="acc-value">74%</div>
+            </div>
+            <div class="progress">
+              <div class="progress-bar low" style="transform: scaleX(0.74);"></div>
+            </div>
+          </div>
+        </section>
       </section>
 
       <!-- FOOTER -->
       <footer class="footer">
         <span>Desenvolvido por <strong>Wolf Mutante</strong></span>
-        <span class="footer-tag">v1.0 • Layout de teste</span>
+        <span class="footer-tag">v1.1 • Layout de teste</span>
       </footer>
     </div>
   </div>
+
+  <script>
+    // Lógica simples das abas
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const sections = document.querySelectorAll(".section");
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tab = btn.dataset.tab;
+
+        tabButtons.forEach((b) => b.classList.remove("active"));
+        sections.forEach((s) => s.classList.remove("active"));
+
+        btn.classList.add("active");
+        document.getElementById(tab).classList.add("active");
+      });
+    });
+  </script>
 </body>
 </html>
