@@ -4,7 +4,230 @@
   <meta charset="UTF-8" />
   <title>Wolf Signals</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
+  <style> /* Painel principal */
+.wolf-sniper-panel {
+    background: #0f172a;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.1);
+}
+
+/* Título */
+.wolf-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #38bdf8;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Relógio */
+.wolf-clock-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.wolf-clock-label {
+    color: #94a3b8;
+    margin-right: 5px;
+}
+
+.wolf-clock {
+    color: #00e676;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Botões */
+.wolf-btn-box {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.wolf-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    max-width: 200px;
+}
+
+.wolf-primary {
+    background: #06b6d4;
+    color: white;
+}
+
+.wolf-primary:hover {
+    background: #0bbcd8;
+}
+
+.wolf-secondary {
+    background: #475569;
+    color: white;
+}
+
+.wolf-secondary:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+/* Texto de status */
+.wolf-status {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #cbd5e1;
+}
+
+/* Bloco resultado */
+.wolf-result-card {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 20px;
+}
+
+.wolf-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.wolf-label {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.wolf-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e2e8f0;
+}
+
+/* Top 10 */
+.wolf-sniper-toplist h4 {
+    color: #38bdf8;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.wolf-toplist-body .wolf-empty {
+    color: #94a3b8;
+    text-align: center;
+}
+
+    .wolf-sniper-panel {
+    background: #0f172a;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.1);
+}
+
+.wolf-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #38bdf8;
+    font-weight: bold;
+    text-align: center;
+}
+
+.wolf-clock-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.wolf-clock-label {
+    color: #94a3b8;
+    margin-right: 5px;
+}
+
+.wolf-clock {
+    color: #00e676;
+    font-weight: bold;
+}
+
+.wolf-btn-box {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.wolf-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.wolf-primary {
+    background: #06b6d4;
+    color: white;
+}
+
+.wolf-primary:hover {
+    background: #0bbcd8;
+}
+
+.wolf-secondary {
+    background: #475569;
+    color: white;
+}
+
+.wolf-secondary:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.wolf-status {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #cbd5e1;
+}
+
+.wolf-result-card {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 20px;
+}
+
+.wolf-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.wolf-label {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.wolf-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e2e8f0;
+}
+
+.wolf-sniper-toplist h4 {
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
+
+.wolf-toplist-body .wolf-empty {
+    color: #94a3b8;
+}
+
     :root {
       --bg-main: #020616;
       --bg-card: #05081c;
