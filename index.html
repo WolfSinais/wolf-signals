@@ -2,73 +2,57 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wolf Signals</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --bg: #020617;
-      --bg-card: rgba(15, 23, 42, 0.95);
-      --bg-chip: rgba(15, 23, 42, 0.9);
-      --primary: #22d3ee;
-      --primary-soft: rgba(34, 211, 238, 0.18);
-      --accent: #f97316;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --error: #f97373;
-      --success: #4ade80;
-      --border: rgba(148, 163, 184, 0.35);
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.9);
-      --radius-lg: 18px;
-      --radius-xl: 24px;
-      --radius-pill: 999px;
+      --bg-main: #020616;
+      --bg-card: #05081c;
+      --bg-card-soft: #090f2a;
+      --accent: #00b4ff;
+      --accent-soft: rgba(0, 180, 255, 0.25);
+      --accent-strong: #00f6ff;
+      --text-main: #f9fafb;
+      --text-soft: #9ca3af;
+      --line-soft: #1f2937;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #facc15;
+      --pill-bg: #02091c;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
-      color: var(--text);
+      background: radial-gradient(circle at top, #051933 0, #00010a 55%, #000 100%);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 18px 10px;
+      padding: 16px;
     }
 
     .app {
       width: 100%;
-      max-width: 430px;
-      background: #020617;
-      border-radius: var(--radius-xl);
+      max-width: 420px;
+      background: radial-gradient(circle at 0 0, #0b1220 0, #020617 55%, #020617 100%);
+      border-radius: 24px;
       border: 1px solid rgba(148, 163, 184, 0.35);
-      box-shadow: var(--shadow-soft);
-      padding: 18px 12px 16px;
-      position: relative;
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.9),
+        0 0 45px rgba(59, 130, 246, 0.25);
       overflow: hidden;
     }
 
-    .glow {
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 70%);
-      filter: blur(12px);
-      opacity: 0.7;
-      pointer-events: none;
-      right: -90px;
-      top: -110px;
-    }
-
     .app-inner {
-      position: relative;
-      z-index: 2;
+      padding: 16px 18px 18px 18px;
     }
 
     /* HEADER */
@@ -77,842 +61,852 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
-      gap: 10px;
+      margin-bottom: 14px;
     }
 
-    .brand {
+    .header-left {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .logo {
+    .avatar {
       width: 34px;
       height: 34px;
-      border-radius: 12px;
-      background: radial-gradient(circle at 30% 20%, #e5e7eb 0, #9ca3af 40%, #111827 100%);
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb 0, #9ca3af 45%, #020617 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 18px rgba(34, 211, 238, 0.6);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.8);
+      border: 2px solid rgba(56, 189, 248, 0.9);
       font-size: 20px;
     }
 
-    .brand-text {
+    .header-title {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    .brand-title {
-      font-size: 18px;
+    .header-title h1 {
+      font-size: 16px;
       font-weight: 700;
       letter-spacing: 0.03em;
-      color: var(--primary);
-    }
-
-    .brand-sub {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .status-chip {
-      background: var(--bg-chip);
-      border-radius: var(--radius-pill);
-      padding: 6px 10px;
-      border: 1px solid rgba(52, 211, 153, 0.5);
+      color: var(--accent-strong);
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--success);
+      gap: 4px;
     }
 
-    .dot {
+    .header-title span {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      background: rgba(22, 163, 74, 0.13);
+      border-radius: 999px;
+      font-size: 11px;
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: var(--success);
+      background: var(--green);
       box-shadow: 0 0 12px rgba(74, 222, 128, 0.9);
     }
 
     /* NAV TABS */
 
-    .tabs {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 12px;
-      padding: 4px;
-      border-radius: var(--radius-pill);
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(31, 41, 55, 0.9);
-    }
-
-    .tab-btn {
-      flex: 1;
-      border-radius: var(--radius-pill);
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      font-size: 11px;
-      padding: 6px 0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.18s ease-out;
-    }
-
-    .tab-btn span.icon {
-      font-size: 13px;
-    }
-
-    .tab-btn.active {
-      background: radial-gradient(circle at top, rgba(34, 211, 238, 0.22), rgba(15, 23, 42, 0.95));
-      color: var(--primary);
-      box-shadow: 0 0 16px rgba(34, 211, 238, 0.3);
-    }
-
-    /* SECTIONS */
-
-    .section {
-      display: none;
-      animation: fadeIn 0.2s ease-out;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(4px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* DASHBOARD (ANTIGO MAIN CARD) */
-
-    .card-main {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.93));
-      border-radius: var(--radius-lg);
-      padding: 14px 14px 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.8);
-      margin-bottom: 14px;
-    }
-
-    .card-main-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .card-main-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .tag-session {
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: var(--radius-pill);
-      background: var(--primary-soft);
-      border: 1px solid rgba(34, 211, 238, 0.6);
-      color: var(--primary);
-    }
-
-    .signal-box {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(34, 211, 238, 0.55);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 1));
-      padding: 12px 10px 12px;
-      text-align: center;
-    }
-
-    .signal-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: var(--text);
-    }
-
-    .signal-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .signal-status {
-      font-size: 11px;
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px dashed rgba(34, 211, 238, 0.6);
-    }
-
-    /* BOTÕES DE TEMPO */
-
-    .time-row {
-      display: flex;
+    .nav-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      margin-top: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 6px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
     }
 
-    .time-btn {
-      flex: 1;
-      border-radius: var(--radius-pill);
-      padding: 7px 0;
+    .nav-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 6px 4px;
       font-size: 11px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--muted);
+      color: var(--text-soft);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.18s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 4px;
+      white-space: nowrap;
     }
 
-    .time-btn span {
-      font-weight: 600;
+    .nav-btn span.dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: transparent;
+    }
+
+    .nav-btn.active {
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.3) 0, rgba(15, 23, 42, 0.9) 40%);
+      color: var(--accent-strong);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.5);
+    }
+
+    .nav-btn.active span.dot {
+      background: var(--accent-strong);
+    }
+
+    /* TABS CONTENT */
+
+    .tab {
+      display: none;
+    }
+
+    .tab.active {
+      display: block;
+    }
+
+    /* DASHBOARD CARD */
+
+    .section-title-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .section-title-line h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
       color: #e5e7eb;
     }
 
-    .time-btn.primary {
-      border-color: rgba(34, 211, 238, 0.85);
-      background: linear-gradient(
-        135deg,
-        rgba(34, 211, 238, 0.25),
-        rgba(56, 189, 248, 0.08)
-      );
-      color: var(--primary);
-      box-shadow: 0 0 18px rgba(34, 211, 238, 0.4);
+    .section-title-line span {
+      font-size: 11px;
+      color: var(--text-soft);
     }
 
-    /* BLOCO PRÓXIMO SINAL */
+    .card-main {
+      margin-top: 6px;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(12, 74, 110, 0.85));
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 12px;
+      box-shadow:
+        0 12px 26px rgba(15, 23, 42, 0.85),
+        0 0 30px rgba(56, 189, 248, 0.6);
+    }
 
-    .next-card {
-      margin-top: 14px;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
-      padding: 10px 11px;
-      display: grid;
-      grid-template-columns: 1.1fr 1.1fr;
-      column-gap: 10px;
-      row-gap: 6px;
+    .pill-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
       font-size: 11px;
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .pill strong {
+      color: #e5e7eb;
+    }
+
+    .pill.mode {
+      border-color: rgba(56, 189, 248, 0.9);
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.4) 0, rgba(15, 23, 42, 0.8) 45%);
+      color: var(--accent-strong);
+    }
+
+    .session-box {
+      margin-top: 4px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.25) 0, rgba(15, 23, 42, 0.95) 45%);
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 10px;
+    }
+
+    .session-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .session-header span {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .session-header strong {
+      font-size: 11px;
+      color: #bbf7d0;
+      background: rgba(21, 128, 61, 0.25);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 197, 94, 0.6);
+    }
+
+    .session-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .session-text {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .btn-setup {
+      width: 100%;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      color: #111827;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 12px 25px rgba(248, 150, 30, 0.65);
+      margin-bottom: 10px;
+    }
+
+    .btn-setup span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #f97316;
+      box-shadow: 0 0 14px rgba(248, 150, 30, 0.9);
+    }
+
+    .timeframe-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tf-pill {
+      flex: 1;
+      min-width: 0;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      background: var(--pill-bg);
+      color: var(--text-soft);
+      font-size: 11px;
+      padding: 6px 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .tf-pill.active {
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.35) 0, rgba(15, 23, 42, 0.9) 50%);
+      border-color: rgba(56, 189, 248, 0.95);
+      color: var(--accent-strong);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.7);
+    }
+
+    .next-signal-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 12px;
+      padding: 8px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      margin-bottom: 6px;
+    }
+
+    .next-row {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 6px;
+      font-size: 11px;
+      margin-bottom: 6px;
     }
 
     .next-label {
-      color: var(--muted);
-      font-size: 10px;
+      color: var(--text-soft);
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
+      font-size: 10px;
+      margin-bottom: 2px;
     }
 
     .next-value {
+      color: #e5e7eb;
       font-weight: 600;
-      color: var(--text);
-      margin-top: 2px;
     }
 
-    .next-badge {
+    .next-highlight {
+      border-radius: 8px;
+      background: rgba(8, 47, 73, 0.9);
+      border: 1px dashed rgba(56, 189, 248, 0.75);
+      padding: 6px 7px;
       font-size: 11px;
-      color: var(--accent);
-      padding: 4px 8px;
-      border-radius: var(--radius-pill);
-      background: rgba(148, 163, 184, 0.08);
-      justify-self: flex-end;
-      align-self: flex-start;
-      border: 1px solid rgba(249, 115, 22, 0.7);
+      color: var(--accent-strong);
     }
 
-    /* SECTION TITLES */
-
-    .section-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      margin: 14px 2px 6px;
+    .next-highlight small {
+      display: block;
+      color: var(--text-soft);
+      margin-top: 3px;
+      font-size: 10px;
     }
 
-    /* HISTÓRICO (DASHBOARD) */
+    .history-title {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
 
-    .history {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: rgba(15, 23, 42, 0.96);
-      padding: 8px 9px 6px;
-      max-height: 130px;
-      overflow: auto;
+    .history-list {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
     .history-item {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 6px 2px;
-      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
-      font-size: 11px;
-    }
-
-    .history-item:last-child {
-      border-bottom: none;
-    }
-
-    .pair {
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .tf {
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .dir {
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .dir.call {
-      color: var(--success);
-    }
-
-    .dir.put {
-      color: var(--error);
-    }
-
-    .result {
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: var(--radius-pill);
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      color: var(--muted);
-    }
-
-    .result.win {
-      border-color: rgba(74, 222, 128, 0.8);
-      color: var(--success);
-    }
-
-    .result.loss {
-      border-color: rgba(248, 113, 113, 0.8);
-      color: var(--error);
-    }
-
-    /* SINAIS – LISTAGEM */
-
-    .signals-list {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: rgba(15, 23, 42, 0.97);
-      padding: 8px 9px;
-      max-height: 210px;
-      overflow: auto;
-    }
-
-    .signal-row {
-      display: grid;
-      grid-template-columns: 1.3fr 0.9fr 0.9fr;
-      column-gap: 6px;
-      padding: 6px 2px;
-      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
-      font-size: 11px;
       align-items: center;
+      padding: 7px 8px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
     }
 
-    .signal-row:last-child {
-      border-bottom: none;
+    .pair-side {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    .badge-dir {
+    .pair-side strong {
+      font-size: 12px;
+    }
+
+    .pair-side span {
       font-size: 10px;
-      padding: 3px 6px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      max-width: fit-content;
+      color: var(--text-soft);
     }
 
-    .badge-dir.call {
-      border-color: rgba(74, 222, 128, 0.9);
-      color: var(--success);
+    .result-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border-width: 1px;
+      border-style: solid;
     }
 
-    .badge-dir.put {
-      border-color: rgba(248, 113, 113, 0.9);
-      color: var(--error);
+    .result-win {
+      border-color: rgba(34, 197, 94, 0.7);
+      color: #bbf7d0;
+      background: rgba(21, 128, 61, 0.18);
     }
 
-    .signal-time {
+    .result-loss {
+      border-color: rgba(248, 113, 113, 0.7);
+      color: #fecaca;
+      background: rgba(127, 29, 29, 0.3);
+    }
+
+    .result-pct {
+      font-size: 11px;
+      margin-left: 6px;
+    }
+
+    .pct-green {
+      color: #4ade80;
+    }
+
+    .pct-red {
+      color: #fb7185;
+    }
+
+    /* TAB: SINAIS */
+
+    .signals-wrap {
+      background: rgba(15, 23, 42, 0.92);
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      padding: 10px;
+      margin-top: 4px;
+    }
+
+    .signals-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 11px;
+    }
+
+    .signals-header span {
+      color: var(--text-soft);
+    }
+
+    .tag-live {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.8);
+      color: var(--accent-strong);
+      background: rgba(15, 23, 42, 0.9);
       font-size: 10px;
-      color: var(--muted);
     }
 
-    .signal-par {
-      font-weight: 500;
-      color: var(--text);
+    .signals-table {
+      margin-top: 4px;
+      border-radius: 10px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      overflow: hidden;
     }
 
-    /* ESTATÍSTICAS – ASSERTIVIDADE */
+    .signals-row {
+      display: grid;
+      grid-template-columns: 0.9fr 0.7fr 0.6fr 0.5fr;
+      gap: 4px;
+      padding: 6px 7px;
+      font-size: 10px;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.92);
+    }
+
+    .signals-row:nth-child(even) {
+      background: rgba(15, 23, 42, 0.98);
+    }
+
+    .signals-row.header {
+      background: rgba(15, 23, 42, 0.99);
+      font-weight: 600;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .badge-call {
+      color: #bbf7d0;
+    }
+
+    .badge-put {
+      color: #fecaca;
+    }
+
+    /* TAB: ESTATÍSTICAS */
+
+    .stats-wrap {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      padding: 10px;
+      margin-top: 4px;
+      font-size: 11px;
+    }
 
     .stats-grid {
       display: grid;
-      grid-template-columns: 1.1fr 1.1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-top: 6px;
     }
 
     .stat-card {
-      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 10px;
       border: 1px solid rgba(31, 41, 55, 0.95);
-      background: rgba(15, 23, 42, 0.97);
-      padding: 8px 9px;
-      font-size: 11px;
+      padding: 8px;
     }
 
     .stat-label {
-      color: var(--muted);
+      color: var(--text-soft);
       font-size: 10px;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
 
     .stat-value {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .stat-value.good {
-      color: var(--success);
-    }
-
-    .stat-value.mid {
-      color: var(--accent);
-    }
-
-    .accuracy-table {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(31, 41, 55, 0.95);
-      background: rgba(15, 23, 42, 0.97);
-      padding: 8px 9px;
-      max-height: 210px;
-      overflow: auto;
-      font-size: 11px;
-    }
-
-    .acc-row {
-      padding: 6px 2px 8px;
-      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
-    }
-
-    .acc-row:last-child {
-      border-bottom: none;
-    }
-
-    .acc-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .acc-pair {
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .acc-tf {
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .acc-value {
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 600;
     }
 
-    .progress {
-      position: relative;
-      width: 100%;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      overflow: hidden;
-      margin-top: 3px;
+    .stat-green {
+      color: #4ade80;
     }
 
-    .progress-bar {
-      position: absolute;
-      inset: 0;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #22c55e, #22d3ee);
-      transform-origin: left;
-      transform: scaleX(0.8);
+    .stat-yellow {
+      color: #facc15;
     }
 
-    .progress-bar.mid {
-      background: linear-gradient(90deg, #facc15, #22d3ee);
+    .stats-pairs {
+      margin-top: 8px;
     }
 
-    .progress-bar.low {
-      background: linear-gradient(90deg, #f97373, #facc15);
-    }
-
-    /* RODAPÉ */
-
-    .footer {
-      margin-top: 12px;
+    .pair-line {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.8);
       font-size: 10px;
-      color: var(--muted);
-      opacity: 0.9;
+    }
+
+    .pair-line:last-child {
+      border-bottom: none;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      margin-top: 12px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 10px;
+      color: var(--text-soft);
+      text-align: center;
     }
 
     .footer span strong {
-      color: var(--primary);
-      font-weight: 600;
+      color: var(--accent-strong);
     }
 
-    .footer-tag {
-      font-size: 10px;
-      padding: 4px 8px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
+    .footer small {
+      color: #6b7280;
     }
 
-    @media (max-width: 370px) {
-      .app {
-        border-radius: 18px;
-        padding: 14px 10px 14px;
+    @media (max-width: 380px) {
+      .app-inner {
+        padding: 14px 12px 16px 12px;
       }
-
-      .card-main {
-        padding: 10px 9px 12px;
-      }
-
-      .next-card {
-        font-size: 10px;
-      }
-
-      .history-item {
-        font-size: 10px;
-      }
-
-      .signal-row {
-        font-size: 10px;
+      .next-row {
+        grid-template-columns: 1.1fr 1fr;
       }
     }
   </style>
 </head>
-
 <body>
-  <div class="app">
-    <div class="glow"></div>
-
+  <main class="app">
     <div class="app-inner">
       <!-- HEADER -->
       <header class="header">
-        <div class="brand">
-          <div class="logo">🐺</div>
-          <div class="brand-text">
-            <div class="brand-title">Wolf Signals</div>
-            <div class="brand-sub">Pocket Option • M5 • Retração</div>
+        <div class="header-left">
+          <div class="avatar">🐺</div>
+          <div class="header-title">
+            <h1>Wolf Signals</h1>
+            <span>Pocket Option • M1/M5 • OTC</span>
           </div>
         </div>
-
-        <div class="status-chip">
-          <div class="dot"></div>
-          <span>Online</span>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          Online
         </div>
       </header>
 
       <!-- NAV TABS -->
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="dashboard">
-          <span class="icon">🏠</span>
-          <span>Dashboard</span>
+      <nav class="nav-tabs">
+        <button class="nav-btn active" data-tab-btn="dashboard">
+          <span class="dot"></span>
+          Dashboard
         </button>
-        <button class="tab-btn" data-tab="signals">
-          <span class="icon">📡</span>
-          <span>Sinais</span>
+        <button class="nav-btn" data-tab-btn="signals">
+          <span class="dot"></span>
+          Sinais
         </button>
-        <button class="tab-btn" data-tab="stats">
-          <span class="icon">📊</span>
-          <span>Estatísticas</span>
+        <button class="nav-btn" data-tab-btn="stats">
+          <span class="dot"></span>
+          Estatísticas
         </button>
-      </div>
+      </nav>
 
-      <!-- DASHBOARD -->
-      <section class="section active" id="dashboard">
-        <section class="card-main">
-          <div class="card-main-header">
-            <span class="card-main-title">Sessão de Sinais</span>
-            <span class="tag-session">Live • Hoje</span>
-          </div>
-
-          <div class="signal-box">
-            <div class="signal-title">Mini app carregado com sucesso ✅</div>
-            <div class="signal-sub">
-              Use o menu abaixo para acompanhar os sinais e a performance da estratégia Wolf Sniper.
-            </div>
-            <div class="signal-status">
-              <span>🔥 Setup Wolf Sniper ativo • M5</span>
-            </div>
-
-            <div class="time-row">
-              <div class="time-btn primary">
-                <span>5s</span>
-                Scalper
-              </div>
-              <div class="time-btn">
-                <span>30s</span>
-                Turbo
-              </div>
-              <div class="time-btn">
-                <span>1min</span>
-                M1
-              </div>
-            </div>
-
-            <div class="next-card">
-              <div>
-                <div class="next-label">Próximo par</div>
-                <div class="next-value">EURUSD OTC</div>
-              </div>
-              <div>
-                <div class="next-label">Horário</div>
-                <div class="next-value">10:35 • Brasília</div>
-              </div>
-              <div>
-                <div class="next-label">Direção</div>
-                <div class="next-value">CALL • Compra</div>
-              </div>
-              <div class="next-badge">Exemplo de layout – edite no GitHub</div>
-            </div>
-          </div>
-        </section>
-
-        <div class="section-title">Histórico recente (exemplo)</div>
-        <section class="history">
-          <div class="history-item">
-            <div>
-              <div class="pair">EURUSD OTC</div>
-              <div class="tf">M5 • CALL</div>
-            </div>
-            <div class="dir call">WIN</div>
-            <div class="result win">+0.87%</div>
-          </div>
-          <div class="history-item">
-            <div>
-              <div class="pair">GBPUSD</div>
-              <div class="tf">M5 • PUT</div>
-            </div>
-            <div class="dir put">LOSS</div>
-            <div class="result loss">–1.00%</div>
-          </div>
-          <div class="history-item">
-            <div>
-              <div class="pair">USDJPY</div>
-              <div class="tf">M5 • CALL</div>
-            </div>
-            <div class="dir call">WIN</div>
-            <div class="result win">+0.92%</div>
-          </div>
-          <div class="history-item">
-            <div>
-              <div class="pair">EURJPY</div>
-              <div class="tf">M5 • PUT</div>
-            </div>
-            <div class="dir call">WIN</div>
-            <div class="result win">+0.81%</div>
-          </div>
-        </section>
-      </section>
-
-      <!-- SINAIS EM TEMPO REAL (EXEMPLO) -->
-      <section class="section" id="signals">
-        <div class="section-title">Fila de Sinais (exemplo)</div>
-
-        <section class="signals-list">
-          <div class="signal-row">
-            <div>
-              <div class="signal-par">EURUSD OTC</div>
-              <div class="signal-time">Expiração 10:35</div>
-            </div>
-            <div class="badge-dir call">CALL</div>
-            <div class="tf">M5 • Retração</div>
-          </div>
-
-          <div class="signal-row">
-            <div>
-              <div class="signal-par">GBPUSD</div>
-              <div class="signal-time">Expiração 10:40</div>
-            </div>
-            <div class="badge-dir put">PUT</div>
-            <div class="tf">M5 • Retração</div>
-          </div>
-
-          <div class="signal-row">
-            <div>
-              <div class="signal-par">USDJPY</div>
-              <div class="signal-time">Expiração 10:42</div>
-            </div>
-            <div class="badge-dir call">CALL</div>
-            <div class="tf">M5 • Pullback</div>
-          </div>
-
-          <div class="signal-row">
-            <div>
-              <div class="signal-par">EURJPY</div>
-              <div class="signal-time">Expiração 10:47</div>
-            </div>
-            <div class="badge-dir put">PUT</div>
-            <div class="tf">M5 • Retração</div>
-          </div>
-
-          <div class="signal-row">
-            <div>
-              <div class="signal-par">AUDUSD</div>
-              <div class="signal-time">Expiração 10:50</div>
-            </div>
-            <div class="badge-dir call">CALL</div>
-            <div class="tf">M5 • Tendência</div>
-          </div>
-        </section>
-      </section>
-
-      <!-- ESTATÍSTICAS / ASSERTIVIDADE -->
-      <section class="section" id="stats">
-        <div class="section-title">Visão geral</div>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-label">Assertividade hoje</div>
-            <div class="stat-value good">86%</div>
-            <div class="signal-time">Exemplo – atualize manualmente</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-label">Últimos 7 dias</div>
-            <div class="stat-value mid">82%</div>
-            <div class="signal-time">Wolf Sniper M5</div>
-          </div>
+      <!-- TAB: DASHBOARD -->
+      <section class="tab active" id="tab-dashboard">
+        <div class="section-title-line">
+          <h2>sessão de sinais</h2>
+          <span>Live • Hoje</span>
         </div>
 
-        <div class="section-title">Assertividade por par</div>
-        <section class="accuracy-table">
-          <!-- Cada bloco = 1 par -->
-          <div class="acc-row">
-            <div class="acc-header">
-              <div>
-                <div class="acc-pair">EURUSD OTC</div>
-                <div class="acc-tf">M5 • Retração</div>
-              </div>
-              <div class="acc-value">88%</div>
+        <div class="card-main">
+          <div class="pill-row">
+            <div class="pill mode">
+              🔥 <strong>Setup Wolf Sniper • Retração</strong>
             </div>
-            <div class="progress">
-              <div class="progress-bar" style="transform: scaleX(0.88);"></div>
+            <div class="pill">
+              Base: <strong>M1 + M5</strong> • OTC
             </div>
           </div>
 
-          <div class="acc-row">
-            <div class="acc-header">
-              <div>
-                <div class="acc-pair">GBPUSD</div>
-                <div class="acc-tf">M5 • Retração</div>
-              </div>
-              <div class="acc-value">81%</div>
+          <div class="session-box">
+            <div class="session-header">
+              <span>Mini app carregado com sucesso ✅</span>
+              <strong>Auto • Análise 100% técnica</strong>
             </div>
-            <div class="progress">
-              <div class="progress-bar mid" style="transform: scaleX(0.81);"></div>
+            <p class="session-title">
+              Use o painel abaixo para acompanhar os sinais e a performance da estratégia Wolf Sniper Trader.
+            </p>
+            <p class="session-text">
+              Os sinais são gerados com base em indicadores (EMA, RSI, Bandas de Bollinger) em M1 e M5,
+              focando nos pares OTC da Pocket Option com melhor payout.
+            </p>
+
+            <button type="button" class="btn-setup">
+              <span class="dot"></span>
+              Setup Wolf Sniper ativo • M1 + M5
+            </button>
+
+            <!-- TIMEFRAMES -->
+            <div class="timeframe-row">
+              <button class="tf-pill active" data-tf="M5">M5 • Retração principal</button>
+              <button class="tf-pill" data-tf="M1">M1 • Filtro de entrada</button>
+            </div>
+
+            <!-- PRÓXIMO SINAL -->
+            <div class="next-signal-card">
+              <div class="next-row">
+                <div>
+                  <div class="next-label">Próximo par</div>
+                  <div class="next-value">EURUSD OTC</div>
+                  <div class="next-label" style="margin-top: 4px;">Direção</div>
+                  <div class="next-value">CALL • Compra (exemplo)</div>
+                </div>
+                <div>
+                  <div class="next-label">Horário</div>
+                  <div class="next-value">
+                    <span id="next-time">--:--</span> • Brasília
+                  </div>
+                  <div class="next-label" style="margin-top: 4px;">Timeframe</div>
+                  <div class="next-value">M5 • Expiração 5 min</div>
+                </div>
+              </div>
+
+              <div class="next-highlight">
+                Exemplo de layout.
+                <small>Os horários e pares reais virão da sua engine Python de sinais.</small>
+              </div>
             </div>
           </div>
 
-          <div class="acc-row">
-            <div class="acc-header">
-              <div>
-                <div class="acc-pair">USDJPY</div>
-                <div class="acc-tf">M5 • Pullback</div>
+          <p class="history-title">Histórico recente (exemplo)</p>
+          <div class="history-list">
+            <div class="history-item">
+              <div class="pair-side">
+                <strong>EURUSD OTC</strong>
+                <span>M5 • CALL • Retração na banda inferior</span>
               </div>
-              <div class="acc-value">84%</div>
+              <div style="display:flex;align-items:center;">
+                <span class="result-tag result-win">WIN</span>
+                <span class="result-pct pct-green">+0.87%</span>
+              </div>
             </div>
-            <div class="progress">
-              <div class="progress-bar" style="transform: scaleX(0.84);"></div>
+
+            <div class="history-item">
+              <div class="pair-side">
+                <strong>GBPUSD OTC</strong>
+                <span>M5 • PUT • Retração na banda superior</span>
+              </div>
+              <div style="display:flex;align-items:center;">
+                <span class="result-tag result-loss">LOSS</span>
+                <span class="result-pct pct-red">-1.00%</span>
+              </div>
+            </div>
+
+            <div class="history-item">
+              <div class="pair-side">
+                <strong>USDJPY OTC</strong>
+                <span>M1 • CALL • Filtro a favor da tendência</span>
+              </div>
+              <div style="display:flex;align-items:center;">
+                <span class="result-tag result-win">WIN</span>
+                <span class="result-pct pct-green">+0.63%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: SINAIS -->
+      <section class="tab" id="tab-signals">
+        <div class="section-title-line">
+          <h2>sinais ao vivo</h2>
+          <span>Base M1 + M5 • OTC</span>
+        </div>
+
+        <div class="signals-wrap">
+          <div class="signals-header">
+            <span>Últimos sinais (exemplo)</span>
+            <span class="tag-live">Streaming do bot Python</span>
+          </div>
+
+          <div class="signals-table">
+            <div class="signals-row header">
+              <div>Par</div>
+              <div>Timeframe</div>
+              <div>Direção</div>
+              <div>Resultado</div>
+            </div>
+
+            <div class="signals-row">
+              <div>EURUSD OTC</div>
+              <div>M5 • 5 min</div>
+              <div class="badge-call">CALL</div>
+              <div class="pct-green">WIN</div>
+            </div>
+
+            <div class="signals-row">
+              <div>GBPUSD OTC</div>
+              <div>M5 • 5 min</div>
+              <div class="badge-put">PUT</div>
+              <div class="pct-red">LOSS</div>
+            </div>
+
+            <div class="signals-row">
+              <div>USDJPY OTC</div>
+              <div>M1 • 1 min</div>
+              <div class="badge-call">CALL</div>
+              <div class="pct-green">WIN</div>
+            </div>
+
+            <div class="signals-row">
+              <div>EURUSD OTC</div>
+              <div>M1 • 1 min</div>
+              <div class="badge-put">PUT</div>
+              <div class="pct-green">WIN</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: ESTATÍSTICAS -->
+      <section class="tab" id="tab-stats">
+        <div class="section-title-line">
+          <h2>estatísticas</h2>
+          <span>Somente M1 + M5 OTC</span>
+        </div>
+
+        <div class="stats-wrap">
+          <p>
+            Esses números são apenas modelo de layout.
+            Depois sua engine Python vai atualizar tudo com base nos resultados reais dos sinais.
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Winrate geral (exemplo)</div>
+              <div class="stat-value stat-green">83.4%</div>
+              <div class="stat-label" style="margin-top:6px;">Amostra</div>
+              <div class="stat-value">Últimos 120 sinais</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Lucro estimado</div>
+              <div class="stat-value stat-yellow">+27.5%</div>
+              <div class="stat-label" style="margin-top:6px;">Gerado com</div>
+              <div class="stat-value">Soros + Mão base</div>
             </div>
           </div>
 
-          <div class="acc-row">
-            <div class="acc-header">
-              <div>
-                <div class="acc-pair">EURJPY</div>
-                <div class="acc-tf">M5 • Tendência</div>
-              </div>
-              <div class="acc-value">79%</div>
-            </div>
-            <div class="progress">
-              <div class="progress-bar mid" style="transform: scaleX(0.79);"></div>
-            </div>
-          </div>
+          <div class="stats-pairs">
+            <div class="stat-label" style="margin-bottom:4px;">Acertividade por par (exemplo)</div>
 
-          <div class="acc-row">
-            <div class="acc-header">
-              <div>
-                <div class="acc-pair">AUDUSD</div>
-                <div class="acc-tf">M5 • Retração</div>
-              </div>
-              <div class="acc-value">74%</div>
+            <div class="pair-line">
+              <span>EURUSD OTC • M5</span>
+              <span class="pct-green">87.5%</span>
             </div>
-            <div class="progress">
-              <div class="progress-bar low" style="transform: scaleX(0.74);"></div>
+            <div class="pair-line">
+              <span>GBPUSD OTC • M5</span>
+              <span class="pct-green">82.0%</span>
+            </div>
+            <div class="pair-line">
+              <span>USDJPY OTC • M1</span>
+              <span class="pct-green">79.3%</span>
+            </div>
+            <div class="pair-line">
+              <span>EURUSD OTC • M1</span>
+              <span class="pct-green">81.1%</span>
             </div>
           </div>
-        </section>
+        </div>
       </section>
 
       <!-- FOOTER -->
       <footer class="footer">
-        <span>Desenvolvido por <strong>Wolf Mutante</strong></span>
-        <span class="footer-tag">v1.1 • Layout de teste</span>
+        <span>Desenvolvido por <strong>Wolf Sniper Trader</strong> 🐺💹</span>
+        <small>Layout do mini app • Dados reais virão da sua engine de sinais em Python.</small>
       </footer>
     </div>
-  </div>
+  </main>
 
   <script>
-    // Lógica simples das abas
-    const tabButtons = document.querySelectorAll(".tab-btn");
-    const sections = document.querySelectorAll(".section");
+    // Tabs (Dashboard / Sinais / Estatísticas)
+    const tabButtons = document.querySelectorAll("[data-tab-btn]");
+    const tabs = document.querySelectorAll(".tab");
 
     tabButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const tab = btn.dataset.tab;
+        const target = btn.getAttribute("data-tab-btn");
 
         tabButtons.forEach((b) => b.classList.remove("active"));
-        sections.forEach((s) => s.classList.remove("active"));
+        tabs.forEach((t) => t.classList.remove("active"));
 
         btn.classList.add("active");
-        document.getElementById(tab).classList.add("active");
+        const tab = document.getElementById(`tab-${target}`);
+        if (tab) tab.classList.add("active");
       });
     });
+
+    // Timeframe pills (M1 / M5)
+    const tfButtons = document.querySelectorAll("[data-tf]");
+    tfButtons.forEach((tf) => {
+      tf.addEventListener("click", () => {
+        tfButtons.forEach((b) => b.classList.remove("active"));
+        tf.classList.add("active");
+      });
+    });
+
+    // Relógio simples de Brasília no card "Horário"
+    function updateClock() {
+      const el = document.getElementById("next-time");
+      if (!el) return;
+      const now = new Date();
+      try {
+        const opts = { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "America/Sao_Paulo" };
+        el.textContent = now.toLocaleTimeString("pt-BR", opts);
+      } catch (e) {
+        // fallback caso o navegador não suporte timeZone
+        const opts = { hour: "2-digit", minute: "2-digit", hour12: false };
+        el.textContent = now.toLocaleTimeString("pt-BR", opts);
+      }
+    }
+    updateClock();
+    setInterval(updateClock, 60000);
   </script>
 </body>
 </html>
