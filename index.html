@@ -906,18 +906,32 @@
 </div>
 
 <!-- BOTÕES DE ANÁLISE -->
-<div class="analysis-actions">
-  <button id="btnRealizarAnalise" class="btn-setup btn-sniper">
-    Realizar análise sniper
-  </button>
-  <button id="btnProximaAnalise" class="tf-pill btn-next" disabled>
-    Próxima análise
-  </button>
+<div id="areaAnalise" class="analise-acoes">
+    <button id="btnRealizarAnalise" class="btn-setup btn-sniper">
+        🚀 Realizar análise sniper
+    </button>
+
+    <button id="btnProximoSinal" class="btn-setup btn-proximo" style="display:none;">
+        ➕ Próximo sinal
+    </button>
 </div>
 
-<p id="statusAnalise" class="session-text status-text">
-  Toque em <b>“Realizar análise sniper”</b> para gerar o próximo sinal.
-</p>
+<!-- RESULTADO DA ANÁLISE -->
+<div id="resultadoSniper" class="resultado-box">
+    <p id="statusAnalise">Aguardando análise...</p>
+
+    <div id="containerResultado" style="display:none;">
+        <p><strong>🌎 Par:</strong> <span id="r-par"></span></p>
+        <p><strong>⏱ Timeframe:</strong> <span id="r-tf"></span></p>
+        <p><strong>📊 Direção:</strong> <span id="r-direcao"></span></p>
+        <p><strong>🔥 Melhor cenário:</strong> <span id="r-melhor"></span></p>
+        <p><strong>📈 Prob. retração:</strong> <span id="r-probR"></span>%</p>
+        <p><strong>📉 Prob. reversão:</strong> <span id="r-probV"></span>%</p>
+        <p><strong>🕒 Entrada:</strong> <span id="r-ent"></span></p>
+        <p><strong>🕒 Saída:</strong> <span id="r-saida"></span></p>
+    </div>
+</div>
+
 
 <!-- PRÓXIMO SINAL -->
 <div class="next-signal-card">
