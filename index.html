@@ -1296,6 +1296,31 @@
       ".timeframe-row .tf-pill[data-timeframe]"
     );
     const btnAnalise = document.getElementById("btnRealizarAnalise");
+    btnProxima.addEventListener("click", async () => {
+    statusEl.textContent = "Buscando próximo sinal...";
+    btnProxima.disabled = true;
+
+    try {
+        const resposta = await fetch(`${API_URL}/analise?timeframe=${state.timeframe}`);
+        const dados = await resposta.json();
+
+        if (!dados.tem_sinal) {
+            statusEl.textContent = "Nenhum sinal forte encontrado. Tentando novamente...";
+            btnProxima.disabled = false;
+            return;
+        }
+
+        mostrarResultado(dados);
+        statusEl.textContent = "Sinal encontrado! 🔥🐺";
+        
+    } catch (err) {
+        statusEl.textContent = "Erro ao buscar sinal.";
+        console.error(err);
+    }
+
+    btnProxima.disabled = false;
+});
+
     const btnProxima = document.getElementById("btnProximaAnalise");
     const statusEl = document.getElementById("statusAnalise");
 
